@@ -4,20 +4,12 @@ import testImg from "../../assets/testImg.png";
 // 使用高阶组件
 import WithMouse from "../HOC";
 
-const kkk=async ()=>{
-  const res=await fetch();
-  console.log(res)
-}
 class Home extends Component {
   constructor(props) {
     super(props);
     console.log(this.props);
   }
 
-  componentDidMount() {
-    kkk();
-  }
-  
   render() {
     console.log(this.props,"this.props")
     return (

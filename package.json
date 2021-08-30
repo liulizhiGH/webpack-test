@@ -37,7 +37,8 @@
     "url-loader": "^2.1.0",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-manifest-plugin": "^4.0.2"
   },
   "dependencies": {
     "@antv/g6": "^3.5.1",
@@ -49,5 +50,13 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liulizhiGH/webpack-test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liulizhiGH/webpack-test/issues"
+  },
+  "homepage": "https://github.com/liulizhiGH/webpack-test#readme"
 }

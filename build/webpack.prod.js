@@ -10,8 +10,10 @@ const happypackThreadPool = Happypack.ThreadPool({ size: os.cpus().length });
 // 单独配置css提取，并压缩
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCss = require("optimize-css-assets-webpack-plugin");
-
+// 生成打包后的静态资源路径文件（资源清单）
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 // 生产环境下使用hash，压缩js代码，提取并压缩css文件，（生产环境默认打包压缩js，所以css需要单独引入压缩插件，并单独配置）
+
 module.exports = {
   mode: "production",
   entry: {
@@ -21,7 +23,7 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"),
     publicPath: "", // 一般不使用cdn资源可以不配置，即默认就是空字符串
     filename: "./js/[name].[chunkhash:8].js", // hash是工程级别的，一个文件修改，所有文件的hash全部重新编译
-    chunkFilename: "./js/chunk.[name].[chunkhash:8].js", // chunkhash是文件级别的，一个文件修改，自身和相关文件的hash重新编译（注：另一个是contenthash,是内容级别的,比前两个影响范围更细更小,只会自身的hash重新编译，但需要自身插件支持，并且需要在相应插件中设置）
+    chunkFilename: "./js/chunk.[name].[chunkhash:8].js", // chunkhash是文件级别的，一个文件修改，自身和相关文件的hash重新编译（注：另一个是contenthash,是内容级别的,比前两者的影响范围更细更小,只会使自身的hash重新编译，但需要自身插件支持，并且需要在相应插件中设置）
   },
   // 拆包（提取每个文件中重复引用的代码部分到一个文件中）
   // wp4新增字段
@@ -30,7 +32,7 @@ module.exports = {
       chunks: "all",
     },
     runtimeChunk: {
-      name: "runtime-manifest", // 生成运行时manifestjs文件（即模块间的依赖地图）
+      name: "runtime-prod-manifest", // 生成运行时manifestjs文件（即模块间的依赖地图）
     },
   },
   module: {
@@ -84,7 +86,7 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 10000,
+              limit: 10000, //即小于等于10kb
               outputPath: "./images", //相对路径，相对于output中的path
             },
           },
@@ -93,6 +95,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new WebpackManifestPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "../public/index.html"),
     }),

@@ -25,7 +25,7 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"),
     publicPath: "", // 不使用cdn资源可以不配置，即默认就是空字符串
     filename: "./js/[name].js", // hash是工程级别的，一个文件修改，所有文件的hash全部重新编译
-    chunkFilename: "./js/chunk.[name].js", // chunkhash是文件级别的，一个文件修改，自身和相关文件的hash重新编译（注：另一个是contenthash,是内容级别的,比前两个影响范围更细更小,只会自身的hash重新编译，但需要相应插件支持，并且需要在相应插件中设置）
+    chunkFilename: "./js/chunk.[name].js", // chunkhash是文件级别的，一个文件修改，自身和相关文件的hash重新编译（注：另一个是contenthash,是内容级别的,比前两者的影响范围更细更小,只会使自身的hash重新编译，但需要相应插件支持，并且需要在相应插件中设置）
   },
   // 拆包（把每个文件中重复引用的代码部分提取到一个文件）
   // wp4新增字段
@@ -34,7 +34,7 @@ module.exports = {
       chunks: "all",
     },
     runtimeChunk: {
-      name: "runtime-manifest", // 生成供webpack使用的运行时的manifestjs文件（即模块间的依赖地图）
+      name: "runtime-dev-manifest", // 生成各个模块间的依赖地图，用来实现长缓存
     },
   },
   module: {
@@ -73,7 +73,7 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 10000,
+              limit: 10000, //即小于等于10kb
               outputPath: "./images", //相对路径，相对于output中的path，其他loader同理
             },
           },
