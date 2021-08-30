@@ -6,6 +6,7 @@ export default function WithMouse(Components) {
     state = {
       x: null,
       y: null,
+      kkk: "hello change",
     };
     mousemove = (e) => {
       this.setState({

@@ -8,13 +8,13 @@ const rootRouter = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/about" component={About}>
+        <Route path="/about">
           <About />
         </Route>
-        <Route path="/concat" component={Concat}>
+        <Route path="/concat">
           <Concat />
         </Route>
-        <Route path="/" component={Home}>
+        <Route path="/">
           <Home />
         </Route>
       </Switch>

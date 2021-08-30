@@ -16,7 +16,9 @@
         "style": true //为true，使用antd组件的less样式文件，为css使用antd组件的css文件
       }
     ],
-    // 开启对class公共字段的支持
-    "@babel/plugin-proposal-class-properties"
+    // 开启对class field公共字段语法的支持
+    "@babel/plugin-proposal-class-properties",
+    // 开启对import()动态导入语法的支持
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

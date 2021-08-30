@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./style.less";
 import testImg from "../../assets/testImg.png";
 // 使用高阶组件
-import WithMouse from "../HOC";
+import("../HOC");
 
 class Home extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props,"this.props")
+    console.log(this.props, "this.props");
     return (
       <ul className="homestyle">
         <img src={testImg} />
@@ -26,4 +26,4 @@ class Home extends Component {
   }
 }
 
-export default WithMouse(Home);
+export default Home;
