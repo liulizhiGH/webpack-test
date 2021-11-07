@@ -1,4 +1,9 @@
-// 高阶组件
+/*
+ * @Author: liulizhi
+ * @Date: 2021-10-09 22:30:46
+ * @LastEditTime: 2021-11-07 21:29:16
+ * @Description: 高阶组件(导出)
+ */
 import React, { Component } from "react";
 
 export default function WithMouse(Components) {
