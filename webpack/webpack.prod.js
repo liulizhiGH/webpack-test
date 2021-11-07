@@ -23,7 +23,7 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"),
     publicPath: "", // 一般不使用cdn资源可以不配置，即默认就是空字符串
     filename: "./js/[name].[chunkhash:8].js", // hash是工程级别的，一个文件修改，所有文件的hash全部重新编译
-    chunkFilename: "./js/chunk.[name].[chunkhash:8].js", // chunkhash是文件级别的，一个文件修改，自身和相关文件的hash重新编译（注：另一个是contenthash,是内容级别的,比前两者的影响范围更细更小,只会使自身的hash重新编译，但需要自身插件支持，并且需要在相应插件中设置）
+    chunkFilename: "./js/chunk.[name].[chunkhash:8].js", // chunkhash是文件级别的，一个文件修改，自身和与它相关文件的hash重新编译（注：另一个是contenthash,是内容级别的,比前两者的影响范围更细更小,只会使自身的hash重新编译，但需要自身插件支持，并且需要在相应插件中设置）
   },
   // 拆包（提取每个文件中重复引用的代码部分到一个文件中）
   // wp4新增字段
@@ -102,7 +102,10 @@ module.exports = {
     // 分包（即提取公共第三方代码库等）
     //引入DllPluginc插件生成的manifestjson文件,可以不使用require，可以只是一个路径
     new Webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, "../dist/js/dll/vendor-manifest.json"),
+      manifest: path.resolve(
+        __dirname,
+        "../dist/js/dll/vendor.dll.manifest.json"
+      ),
     }),
     // 提取css,路径相对于output.path
     new MiniCssExtractPlugin({
